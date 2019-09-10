@@ -1,19 +1,23 @@
-String.prototype.replace2 = function (rep1, rep2, troca) {
-    const elementoNovo = this.replace(`${rep1}`, `${troca}`).replace(`${rep2}`, `${troca}`);
-    return elementoNovo;
-}
-
 // Função principar para pegar os valores, verificar e converter
 function mainConverter(id, conversor) {
     const colorValue = getValue(id).value;
-    const arrayVerif = colorValue.replace2("(", ")", "").split(",");
+    const arrayVerif = colorValue.replace(/[)( ]/g, "").split(",");
+    const rgbVerif = verificationRgb(arrayVerif, conversor);
+    if (rgbVerif === true) { return }
+    
     if (conversor === 1) {
-        const numberVerif = nbmVerifRgb(arrayVerif);
-        if (numberVerif === true) { return }
-        const arrayCmy = converterToCmy(arrayVerif)
-        writeResp(id, arrayCmy, "CMY")
+        const arrayCmy = rgbToCmy(arrayVerif);
+        writeResp(id, arrayCmy, "CMY");
+        chageColorEx(id, colorValue);
     }
-    chageColorEx(id, colorValue)
+    if (conversor === 2) {
+        const arrayRgb = cmyToRgb(arrayVerif);
+        writeResp(id, arrayRgb, "RGB");
+        const x = arrayRgb.toString()
+        const y = `(${x})`
+        chageColorEx(id, y)
+        console.log(y);
+    }
     // getValue(`resultado${id}`).innerHTML = `CMY = ${arrayCmy}`
 }
 
@@ -26,28 +30,41 @@ function getValue(e) {
     return this.document.getElementById(e);
 }
 
-// Função para verificar se o array é menor que zero, maior que 255 ou contem letras (RGB)
-function nbmVerifRgb(value) {
-    let erro = false;
-    value.forEach(e => {
-
-        if (e === "000") { return }
-        else if (e === "") {
-            alert(`ERRO: Você não escreveu um dos valores.`);
-            return erro = true;
-        } else if (!Number(e)) {
-            alert(`ERRO: O valor ${e} contém uma letra.`);
-            return erro = true;
-        } else if (e > 255 || e < 0) {
-            alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
-            return erro = true;
-        }
-    });
-    return erro;
+function chageColorEx(id, color) {
+    const typeColor = id.replace("'", "")
+    document.getElementById(`colorEx${typeColor}`).style.backgroundColor = `RGB${color}`
 }
 
 
-function converterToCmy(value) {
+
+// ----------Verificações-----------
+// Função para verificar se o array é menor que zero, maior que 255 ou contem letras (RGB)
+function verificationRgb(value, numb) {
+    let erro = false;
+    value.forEach(e => {
+        if (e === "000" || "0.000000") { return }
+        else if (e === "") { alert(`ERRO: Você não escreveu um dos valores.`) 
+        return erro = true;
+        } else if (!Number(e)) { alert(`ERRO: O valor ${e} contém uma letra.`);
+            return erro = true;
+        } else if (numb === 1) { if (e > 255 || e < 0) {
+                alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
+                return erro = true;
+            }
+        } else if (numb === 2) { if (e > 1 || e < 0 ) {
+                alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
+                return erro = true;
+        }}
+    });
+    return erro;
+}
+// ----------Verificações-----------        
+
+
+
+
+// ----------Conversores------------
+function rgbToCmy(value) {
     const novoArrayCmy = value.map(e => {
         const test = 1 - (e / 255);
         const resposta = parseFloat(test.toFixed(5))
@@ -56,11 +73,16 @@ function converterToCmy(value) {
     return novoArrayCmy;
 }
 
-function chageColorEx(id, color) {
-    const typeColor = id.replace("'", "")
-    document.getElementById(`colorEx${typeColor}`).style.backgroundColor = `${typeColor}${color}`
-
+function cmyToRgb(value) {
+    const novoArrayRgb = value.map(e => {
+        const test = (1 - e) * 255;
+        return `${test}`
+    })
+    return novoArrayRgb
 }
+// ----------Conversores------------
+
+
 
 
 // -----------input -----------------

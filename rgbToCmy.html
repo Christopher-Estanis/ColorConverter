@@ -34,8 +34,9 @@
                 <label for="rgb" class="linha">CMY:</label>
                 <input type="text" id="cmy" maxlength="30" placeholder="0 - 1" class="box-text" onkeydown="chageValue('cmy', 2)">
                 <label for="rgb" class="exemplo textEx">Exemplo: (0.000001, 0.000001, 0.000001)</label>
-                <button class="btn-style border-total" id="respCmy">Resposta</button>
-                <label id="resultadorgb" class="resultado align"></label>
+                <button class="btn-style border-total" id="respCmy" onclick="mainConverter('cmy', 2)">Resposta</button>
+                <div class="corEx align" id="colorExcmy"></div>
+                <label id="resultadocmy" class="resultado align"></label>
             </div>
         </div>
     </nav>
