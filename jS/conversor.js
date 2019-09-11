@@ -16,7 +16,6 @@ function mainConverter(id, conversor) {
         const x = arrayRgb.toString()
         const y = `(${x})`
         changeColorEx(id, y)
-        console.log(y);
     }
     if (conversor === 3) {
         const arrayHex = rgbToHex(arrayVerif);
@@ -27,6 +26,21 @@ function mainConverter(id, conversor) {
         const arrayRgb = hexToRgb(colorValue);
         writeResp(id, arrayRgb, "RGB");
         changeColorEx(id, arrayRgb)
+    }
+    if (conversor === 5) {
+        const arrayRgb = cmyToRgb(arrayVerif);
+        const x = arrayRgb.toString()
+        const y = `(${x})`
+        changeColorEx(id, y)
+        const arrayHex = rgbToHex(arrayRgb);
+        writeResp(id, arrayHex, "Hex");
+    }
+    if (conversor === 6) {
+        const stringRgb = hexToRgb(colorValue);
+        const arrayRgb = stringRgb.replace(/[)( ]/g, "").split(",");
+        const arrayCmy = rgbToCmy(arrayRgb);
+        writeResp(id, arrayCmy, "CMY");
+        changeColorEx(id, stringRgb)
     }
 }
 
@@ -63,7 +77,7 @@ function verificationRgb(value, numb) {
                 alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
                 return erro = true;
             }
-        } else if (numb === 2) {
+        } else if (numb === 2 || 5) {
             if (e > 1 || e < 0) {
                 alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
                 return erro = true;

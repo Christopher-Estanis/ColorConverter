@@ -19,9 +19,9 @@
             </header>
             <div class="align navegacao">
                 <label for="cmy" class="linha">CMY:</label>
-                <input type="text" id="cmy" maxlength="13" placeholder="0 - 255" class="box-text" onkeydown="chageValue('cmy', 1)">
-                <label for="cmy" class="exemplo textEx">Exemplo: (255,255,255)</label>
-                <button class="btn-style border-total" id="respcmy" onclick="mainConverter('cmy', 3)">Resposta</button>
+                <input type="text" id="cmy" maxlength="30" placeholder="0 - 1" class="box-text" onkeydown="chageValue('cmy', 2)">
+                <label for="rgb" class="exemplo textEx">Exemplo: (0.000001, 0.000001, 0.000001)</label>
+                <button class="btn-style border-total" id="respcmy" onclick="mainConverter('cmy', 5)">Resposta</button>
                 <div class="corEx align" id="colorExcmy"></div>
                 <label id="resultadocmy" class="resultado align"></label>
             </div>
@@ -32,9 +32,9 @@
             </header>
             <div class="align navegacao">
                 <label for="hex" class="linha">HEX:</label>
-                <input type="text" id="hex" maxlength="7" placeholder="0 - 1" class="box-text" onkeydown="chageValue('hex', 4)">
+                <input type="text" id="hex" maxlength="7" placeholder="000000 - ffffff" class="box-text" onkeydown="chageValue('hex', 4)">
                 <label for="hex" class="exemplo textEx">Exemplo: #ffffff</label>
-                <button class="btn-style border-total" id="respHex" onclick="mainConverter('hex', 4)">Resposta</button>
+                <button class="btn-style border-total" id="respHex" onclick="mainConverter('hex', 6)">Resposta</button>
                 <div class="corEx align" id="colorExhex"></div>
                 <label id="resultadohex" class="resultado align"></label>
             </div>
