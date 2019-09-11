@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>CMY and HEX</title>
+</head>
+
+<body class="color-gray align">
+    <nav class="align-row">
+        <div class="container align border-top shadow-gray conversor">
+            <header class="header align container border-top">
+                <h2>CMY to HEX:</h2>
+            </header>
+            <div class="align navegacao">
+                <label for="cmy" class="linha">CMY:</label>
+                <input type="text" id="cmy" maxlength="13" placeholder="0 - 255" class="box-text" onkeydown="chageValue('cmy', 1)">
+                <label for="cmy" class="exemplo textEx">Exemplo: (255,255,255)</label>
+                <button class="btn-style border-total" id="respcmy" onclick="mainConverter('cmy', 3)">Resposta</button>
+                <div class="corEx align" id="colorExcmy"></div>
+                <label id="resultadocmy" class="resultado align"></label>
+            </div>
+        </div>
+        <div class="container align border-top shadow-gray conversor">
+            <header class="header align container border-top">
+                <h2>HEX to CMY:</h2>
+            </header>
+            <div class="align navegacao">
+                <label for="hex" class="linha">HEX:</label>
+                <input type="text" id="hex" maxlength="7" placeholder="0 - 1" class="box-text" onkeydown="chageValue('hex', 4)">
+                <label for="hex" class="exemplo textEx">Exemplo: #ffffff</label>
+                <button class="btn-style border-total" id="respHex" onclick="mainConverter('hex', 4)">Resposta</button>
+                <div class="corEx align" id="colorExhex"></div>
+                <label id="resultadohex" class="resultado align"></label>
+            </div>
+        </div>
+    </nav>
+
+    <footer class="footer">
+        <a href="index.html" class="link-back align">Voltar</a>
+    </footer>
+    
+    <script src="jS/conversor.js"></script>
+</body>
+
+</html>

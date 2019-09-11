@@ -4,21 +4,30 @@ function mainConverter(id, conversor) {
     const arrayVerif = colorValue.replace(/[)( ]/g, "").split(",");
     const rgbVerif = verificationRgb(arrayVerif, conversor);
     if (rgbVerif === true) { return }
-    
+
     if (conversor === 1) {
         const arrayCmy = rgbToCmy(arrayVerif);
         writeResp(id, arrayCmy, "CMY");
-        chageColorEx(id, colorValue);
+        changeColorEx(id, colorValue);
     }
     if (conversor === 2) {
         const arrayRgb = cmyToRgb(arrayVerif);
         writeResp(id, arrayRgb, "RGB");
         const x = arrayRgb.toString()
         const y = `(${x})`
-        chageColorEx(id, y)
+        changeColorEx(id, y)
         console.log(y);
     }
-    // getValue(`resultado${id}`).innerHTML = `CMY = ${arrayCmy}`
+    if (conversor === 3) {
+        const arrayHex = rgbToHex(arrayVerif);
+        writeResp(id, arrayHex, "Hex");
+        changeColorEx(id, colorValue);
+    }
+    if (conversor === 4) {
+        const arrayRgb = hexToRgb(colorValue);
+        writeResp(id, arrayRgb, "RGB");
+        changeColorEx(id, arrayRgb)
+    }
 }
 
 function writeResp(id, resp, cor) {
@@ -30,7 +39,7 @@ function getValue(e) {
     return this.document.getElementById(e);
 }
 
-function chageColorEx(id, color) {
+function changeColorEx(id, color) {
     const typeColor = id.replace("'", "")
     document.getElementById(`colorEx${typeColor}`).style.backgroundColor = `RGB${color}`
 }
@@ -43,18 +52,23 @@ function verificationRgb(value, numb) {
     let erro = false;
     value.forEach(e => {
         if (e === "000" || "0.000000") { return }
-        else if (e === "") { alert(`ERRO: Você não escreveu um dos valores.`) 
-        return erro = true;
-        } else if (!Number(e)) { alert(`ERRO: O valor ${e} contém uma letra.`);
+        else if (e === "") {
+            alert(`ERRO: Você não escreveu um dos valores.`)
             return erro = true;
-        } else if (numb === 1) { if (e > 255 || e < 0) {
+        } else if (!Number(e)) {
+            alert(`ERRO: O valor ${e} contém uma letra.`);
+            return erro = true;
+        } else if (numb === 1 || 3) {
+            if (e > 255 || e < 0) {
                 alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
                 return erro = true;
             }
-        } else if (numb === 2) { if (e > 1 || e < 0 ) {
+        } else if (numb === 2) {
+            if (e > 1 || e < 0) {
                 alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
                 return erro = true;
-        }}
+            }
+        }
     });
     return erro;
 }
@@ -67,8 +81,8 @@ function verificationRgb(value, numb) {
 function rgbToCmy(value) {
     const novoArrayCmy = value.map(e => {
         const test = 1 - (e / 255);
-        const resposta = parseFloat(test.toFixed(5))
-        return ` ${resposta}`
+        const resposta = parseFloat(test.toFixed(5));
+        return ` ${resposta}`;
     })
     return novoArrayCmy;
 }
@@ -76,9 +90,34 @@ function rgbToCmy(value) {
 function cmyToRgb(value) {
     const novoArrayRgb = value.map(e => {
         const test = (1 - e) * 255;
-        return `${test}`
+        return `${test}`;
     })
-    return novoArrayRgb
+    return novoArrayRgb;
+}
+
+function rgbToHex(value) {
+    const numbRgb = transformNumber(value);
+    const hexR = numbRgb[1].toString(16);
+    const hexG = numbRgb[2].toString(16);
+    const hexB = numbRgb[1].toString(16);
+    return `#${hexR}${hexG}${hexB}`
+}
+
+function transformNumber(value) {
+    const x = value.map(e => {
+        return Number(e)
+    })
+    return x
+}
+
+function hexToRgb(hex) {
+    const r = hex.slice(1, 3);
+    const g = hex.slice(3, 5);
+    const b = hex.slice(5, 7);
+    const respR = parseInt(r, 16);
+    const respG = parseInt(g, 16);
+    const respB = parseInt(b, 16);
+    return `(${respR}, ${respG}, ${respB})`
 }
 // ----------Conversores------------
 
@@ -96,7 +135,7 @@ function chageValue(id, conversor) {
         chageIf(name, 4, ',', 'back')
         chageIf(name, 8, ',', 'back')
     }
-    if (conversor === 2)  {
+    if (conversor === 2) {
         chageIf(name, 0, '(', 'front')
         chageIf(name, 29, ')', 'back')
         chageIf(name, 2, '.', 'back')
@@ -104,6 +143,9 @@ function chageValue(id, conversor) {
         chageIf(name, 12, '.', 'back')
         chageIf(name, 19, ', ', 'back')
         chageIf(name, 22, '.', 'back')
+    }
+    if (conversor === 4) {
+        chageIf(name, 0, '#', 'front')
     }
 }
 

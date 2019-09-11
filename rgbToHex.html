@@ -8,35 +8,35 @@
     <link rel="stylesheet" href="css/estilo.css">
     <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <title>RGB and CMY</title>
+    <title>RGB and HEX</title>
 </head>
 
 <body class="color-gray align">
     <nav class="align-row">
         <div class="container align border-top shadow-gray conversor">
             <header class="header align container border-top">
-                <h2>RGB to CMY:</h2>
+                <h2>RGB to HEX:</h2>
             </header>
             <div class="align navegacao">
                 <label for="rgb" class="linha">RGB:</label>
                 <input type="text" id="rgb" maxlength="13" placeholder="0 - 255" class="box-text" onkeydown="chageValue('rgb', 1)">
                 <label for="rgb" class="exemplo textEx">Exemplo: (255,255,255)</label>
-                <button class="btn-style border-total" id="resprgb" onclick="mainConverter('rgb', 1)">Resposta</button>
+                <button class="btn-style border-total" id="resprgb" onclick="mainConverter('rgb', 3)">Resposta</button>
                 <div class="corEx align" id="colorExrgb"></div>
                 <label id="resultadorgb" class="resultado align"></label>
             </div>
         </div>
         <div class="container align border-top shadow-gray conversor">
             <header class="header align container border-top">
-                <h2>CMY to RGB:</h2>
+                <h2>HEX to RGB:</h2>
             </header>
             <div class="align navegacao">
-                <label for="rgb" class="linha">CMY:</label>
-                <input type="text" id="cmy" maxlength="30" placeholder="0 - 1" class="box-text" onkeydown="chageValue('cmy', 2)">
-                <label for="rgb" class="exemplo textEx">Exemplo: (0.000001, 0.000001, 0.000001)</label>
-                <button class="btn-style border-total" id="respCmy" onclick="mainConverter('cmy', 2)">Resposta</button>
-                <div class="corEx align" id="colorExcmy"></div>
-                <label id="resultadocmy" class="resultado align"></label>
+                <label for="hex" class="linha">HEX:</label>
+                <input type="text" id="hex" maxlength="7" placeholder="0 - 1" class="box-text" onkeydown="chageValue('hex', 4)">
+                <label for="hex" class="exemplo textEx">Exemplo: #ffffff</label>
+                <button class="btn-style border-total" id="respHex" onclick="mainConverter('hex', 4)">Resposta</button>
+                <div class="corEx align" id="colorExhex"></div>
+                <label id="resultadohex" class="resultado align"></label>
             </div>
         </div>
     </nav>
