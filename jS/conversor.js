@@ -63,9 +63,10 @@ function changeColorEx(id, color) {
 // ----------Verificações-----------
 // Função para verificar se o array é menor que zero, maior que 255 ou contem letras (RGB)
 function verificationRgb(value, numb) {
+    console.log(value);
     let erro = false;
     value.forEach(e => {
-        if (e === "000" || "0.000000") { return }
+        if (e === "000") { return }
         else if (e === "") {
             alert(`ERRO: Você não escreveu um dos valores.`)
             return erro = true;
@@ -175,6 +176,14 @@ function chageIf(element, number, concat, local) {
             element.value = element.value + concat;
         }
     }
+}
+
+function focusExemple(id) {
+    getValue(`textEx${id}`).innerHTML = "Exemplo: (255,255,255)";
+}
+
+function exitExemple(id) {
+    getValue(`textEx${id}`).innerHTML = "";
 }
 
 // -----------input -----------------
