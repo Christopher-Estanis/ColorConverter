@@ -63,23 +63,28 @@ function changeColorEx(id, color) {
 // ----------Verificações-----------
 // Função para verificar se o array é menor que zero, maior que 255 ou contem letras (RGB)
 function verificationRgb(value, numb) {
-    console.log(value);
     let erro = false;
+    const x = /[g-z]/gi;
     value.forEach(e => {
         if (e === "000") { return }
         else if (e === "") {
             alert(`ERRO: Você não escreveu um dos valores.`)
             return erro = true;
-        } else if (!Number(e)) {
+        } else if (!Number(e) && numb !== 4) {
             alert(`ERRO: O valor ${e} contém uma letra.`);
             return erro = true;
-        } else if (numb === 1 || 3) {
+        } else if (numb === 1 || numb === 3 ) {
             if (e > 255 || e < 0) {
                 alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
                 return erro = true;
             }
-        } else if (numb === 2 || 5) {
+        } else if (numb === 2 || numb === 5) {
             if (e > 1 || e < 0) {
+                alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
+                return erro = true;
+            }
+        } else if (numb === 4) {
+            if (x.test(e)) {
                 alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
                 return erro = true;
             }
@@ -178,8 +183,8 @@ function chageIf(element, number, concat, local) {
     }
 }
 
-function focusExemple(id) {
-    getValue(`textEx${id}`).innerHTML = "Exemplo: (255,255,255)";
+function focusExemple(id, text) {
+    getValue(`textEx${id}`).innerHTML = `EX: ${text}`;
 }
 
 function exitExemple(id) {
