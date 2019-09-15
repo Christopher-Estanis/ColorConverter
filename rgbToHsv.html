@@ -21,7 +21,7 @@
                 <label for="rgb" class="linha">RGB:</label>
                 <input type="text" id="rgb" maxlength="13" placeholder="0 - 255" class="box-text" onkeydown="chageValue('rgb', 1)">
                 <label for="rgb" class="exemplo textEx">Exemplo: (255,255,255)</label>
-                <button class="btn-style border-total" id="resprgb" onclick="mainConverter('rgb', 3)">Resposta</button>
+                <button class="btn-style border-total" id="resprgb" onclick="mainConverter('rgb', 7)">Resposta</button>
                 <div class="corEx align" id="colorExrgb"></div>
                 <label id="resultadorgb" class="resultado align"></label>
             </div>
@@ -32,11 +32,11 @@
             </header>
             <div class="align navegacao">
                 <label for="hex" class="linha">HSV:</label>
-                <input type="text" id="hex" maxlength="7" placeholder="000000 - ffffff" class="box-text" onkeydown="chageValue('hex', 4)">
-                <label for="hex" class="exemplo textEx">Exemplo: #ffffff</label>
-                <button class="btn-style border-total" id="respHex" onclick="mainConverter('hex', 4)">Resposta</button>
-                <div class="corEx align" id="colorExhex"></div>
-                <label id="resultadohex" class="resultado align"></label>
+                <input type="text" id="hsv" placeholder="(000°,000,000)" class="box-text">
+                <label for="hsv" class="exemplo textEx">Exemplo: #ffffff</label>
+                <button class="btn-style border-total" id="resphsv" onclick="mainConverter('hsv', 8)">Resposta</button>
+                <div class="corEx align" id="colorExhsv"></div>
+                <label id="resultadohsv" class="resultado align"></label>
             </div>
         </div>
     </nav>
@@ -46,6 +46,8 @@
     </footer>
     
     <script src="jS/conversor.js"></script>
+   
+    
 </body>
 
 </html>
