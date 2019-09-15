@@ -19,7 +19,9 @@
             </header>
             <div class="align navegacao">
                 <label for="rgb" class="linha">RGB:</label>
-                <input type="text" id="rgb" maxlength="13" placeholder="0 - 255" class="box-text"  onkeydown="chageValue('rgb', 1)" onfocusin="focusExemple('rgb', '(255, 255, 000)')" onfocusout="exitExemple('rgb')">
+                <input type="text" id="rgb" maxlength="13" placeholder="0 - 255" class="box-text"  
+                    onkeydown="chageValue('rgb', 1)" 
+                    onfocusin="focusExemple('rgb', '(255, 255, 000)')" onfocusout="exitExemple('rgb')">
                 <label for="rgb" class="exemplo" id="textExrgb"></label>
                 <button class="btn-style border-total" id="resprgb" onclick="mainConverter('rgb', 1)">Resposta</button>
                 <div class="corEx align" id="colorExrgb"></div>
