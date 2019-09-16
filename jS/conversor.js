@@ -253,36 +253,36 @@ function hexToRgb(hex) {
 function chageValue(id, conversor) {
 	const name = this.getValue(id);
 	if (conversor === 1) {
-		chageIf(name, 0, '(', 'front')
-		chageIf(name, 4, ',', 'back')
-		chageIf(name, 8, ',', 'back')
-		chageIf(name, 12, ')', 'back')
+		changeIf(name, 0, '(', 'front')
+		changeIf(name, 4, ',', 'back')
+		changeIf(name, 8, ',', 'back')
+		changeIf(name, 12, ')', 'back')
 	}
 	if (conversor === 2) {
-		chageIf(name, 0, '(', 'front')
-		chageIf(name, 2, '.', 'back')
-		chageIf(name, 9, ', ', 'back')
-		chageIf(name, 12, '.', 'back')
-		chageIf(name, 19, ', ', 'back')
-		chageIf(name, 22, '.', 'back')
-		chageIf(name, 29, ')', 'back')
+		changeIf(name, 0, '(', 'front')
+		changeIf(name, 2, '.', 'back')
+		changeIf(name, 9, ', ', 'back')
+		changeIf(name, 12, '.', 'back')
+		changeIf(name, 19, ', ', 'back')
+		changeIf(name, 22, '.', 'back')
+		changeIf(name, 29, ')', 'back')
 	}
 	if (conversor === 4) {
-		chageIf(name, 0, '#', 'front')
+		changeIf(name, 0, '#', 'front')
 	}
 	if (conversor === 5) {
-		chageIf(name, 0, '(', 'front')
-		chageIf(name, 4, '°', 'back')
-		chageIf(name, 5, ', ', 'back')
-		chageIf(name, 10, '%', 'back')
-		chageIf(name, 11, ', ', 'back')
-		chageIf(name, 16, '%', 'back')
-		chageIf(name, 17, ')', 'back')
+		changeIf(name, 0, '(', 'front')
+		changeIf(name, 4, '°', 'back')
+		changeIf(name, 5, ', ', 'back')
+		changeIf(name, 10, '%', 'back')
+		changeIf(name, 11, ', ', 'back')
+		changeIf(name, 16, '%', 'back')
+		changeIf(name, 17, ')', 'back')
 	}
 }
 
 
-function chageIf(element, number, concat, local) {
+function changeIf(element, number, concat, local) {
 	if (local === 'front') {
 		if (element.value.length === number) {
 			element.value = concat + element.value;
