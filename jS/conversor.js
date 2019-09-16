@@ -1,7 +1,9 @@
 // Função principar para pegar os valores, verificar e converter
+// Parametros vindo do HTML 
 function mainConverter(id, conversor) {
 	const colorValue = getValue(id).value;
-	const arrayVerif = colorValue.replace(/[)( ]/g, "").split(",");
+	const arrayVerif = colorValue.replace(/[)(%° ]/g, "").split(",");
+	console.log(arrayVerif)
 	const rgbVerif = verificationRgb(arrayVerif, conversor);
 	if (rgbVerif === true) { return }
 
@@ -45,8 +47,7 @@ function mainConverter(id, conversor) {
 	if (conversor === 7) {
 		const arrayHsv = rgbToHsv(arrayVerif);
 		writeResp(id, arrayHsv, "HSV");
-
-
+		changeColorEx(id, colorValue)
 	}
 	if(conversor === 8){
 		const arrayRgb = hsvToRgb(arrayVerif);
@@ -86,7 +87,7 @@ function verificationRgb(value, numb) {
 		} else if (!Number(e) && numb !== 4) {
 			alert(`ERRO: O valor ${e} contém uma letra.`);
 			return erro = true;
-		} else if (numb === 1 || numb === 3) {
+		} else if (numb === 1 || numb === 3 || numb === 7) {
 			if (e > 255 || e < 0) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
@@ -253,21 +254,30 @@ function chageValue(id, conversor) {
 	const name = this.getValue(id);
 	if (conversor === 1) {
 		chageIf(name, 0, '(', 'front')
-		chageIf(name, 12, ')', 'back')
 		chageIf(name, 4, ',', 'back')
 		chageIf(name, 8, ',', 'back')
+		chageIf(name, 12, ')', 'back')
 	}
 	if (conversor === 2) {
 		chageIf(name, 0, '(', 'front')
-		chageIf(name, 29, ')', 'back')
 		chageIf(name, 2, '.', 'back')
 		chageIf(name, 9, ', ', 'back')
 		chageIf(name, 12, '.', 'back')
 		chageIf(name, 19, ', ', 'back')
 		chageIf(name, 22, '.', 'back')
+		chageIf(name, 29, ')', 'back')
 	}
 	if (conversor === 4) {
 		chageIf(name, 0, '#', 'front')
+	}
+	if (conversor === 5) {
+		chageIf(name, 0, '(', 'front')
+		chageIf(name, 4, '°', 'back')
+		chageIf(name, 5, ', ', 'back')
+		chageIf(name, 10, '%', 'back')
+		chageIf(name, 11, ', ', 'back')
+		chageIf(name, 16, '%', 'back')
+		chageIf(name, 17, ')', 'back')
 	}
 }
 
