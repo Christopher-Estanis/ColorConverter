@@ -63,8 +63,8 @@ function writeResp(id, resp, cor) {
 }
 
 // função para pegar o id
-function getValue(e) {
-	return this.document.getElementById(e);
+function getValue(id) {
+	return this.document.getElementById(id);
 }
 
 function changeColorEx(id, color) {
@@ -78,13 +78,14 @@ function changeColorEx(id, color) {
 // Função para verificar se o array é menor que zero, maior que 255 ou contem letras (RGB)
 function verificationRgb(value, numb) {
 	let erro = false;
-	const x = /[g-z]/gi;
+	const hexRegExp = /[g-z]/gi;
+	const caracterRegExp = /[a-z]/gi
 	value.forEach(e => {
 		if (e === "000") { return }
 		else if (e === "") {
 			alert(`ERRO: Você não escreveu um dos valores.`)
 			return erro = true;
-		} else if (!Number(e) && numb !== 4 && numb !== 6) {
+		} else if (caracterRegExp.test(e) && numb !== 4 && numb !== 6) {
 			alert(`ERRO: O valor ${e} contém uma letra.`);
 			return erro = true;
 		} else if (numb === 1 || numb === 3 || numb === 7) {
@@ -98,7 +99,7 @@ function verificationRgb(value, numb) {
 				return erro = true;
 			}
 		} else if (numb === 4 || numb === 6) {
-			if (x.test(e)) {
+			if (hexRegExp.test(e)) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
@@ -124,16 +125,17 @@ function rgbToCmy(value) {
 function cmyToRgb(value) {
 	const novoArrayRgb = value.map(e => {
 		const test = (1 - e) * 255;
-		return `${test}`;
+		const respTest = test.toFixed(1)
+		return `${respTest}`;
 	})
 	return novoArrayRgb;
 }
 
 function rgbToHex(value) {
 	const numbRgb = transformNumber(value);
-	const hexR = numbRgb[1].toString(16);
-	const hexG = numbRgb[2].toString(16);
-	const hexB = numbRgb[1].toString(16);
+	const hexR = numbRgb[1].toFixed(0).toString(16);
+	const hexG = numbRgb[2].toFixed(0).toString(16);
+	const hexB = numbRgb[1].toFixed(0).toString(16);
 	return `#${hexR}${hexG}${hexB}`
 }
 
@@ -250,15 +252,20 @@ function hexToRgb(hex) {
 
 
 // adiciona virgulas e parenteses no input
-function chageValue(id, conversor) {
+function chageValue(id, conversor, maxLength) {
 	const name = this.getValue(id);
-	if (conversor === 1) {
+	const rgbNumbers = /[137]/g;
+	const cmyNumbers = /[25]/g;
+	const hexNumbers = /[46]/g;
+	const hsvNumbers = /[8]/g;
+	
+	if (rgbNumbers.test(conversor)) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 4, ',', 'back')
 		changeIf(name, 8, ',', 'back')
 		changeIf(name, 12, ')', 'back')
 	}
-	if (conversor === 2) {
+	if (cmyNumbers.test(conversor)) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 2, '.', 'back')
 		changeIf(name, 9, ', ', 'back')
@@ -267,10 +274,10 @@ function chageValue(id, conversor) {
 		changeIf(name, 22, '.', 'back')
 		changeIf(name, 29, ')', 'back')
 	}
-	if (conversor === 4) {
+	if (hexNumbers.test(conversor)) {
 		changeIf(name, 0, '#', 'front')
 	}
-	if (conversor === 5) {
+	if (hsvNumbers.test(conversor)) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 4, '°', 'back')
 		changeIf(name, 5, ', ', 'back')
@@ -278,6 +285,9 @@ function chageValue(id, conversor) {
 		changeIf(name, 11, ', ', 'back')
 		changeIf(name, 16, '%', 'back')
 		changeIf(name, 17, ')', 'back')
+	}
+	if(name.value.length === maxLength) {
+		mainConverter(id, conversor)
 	}
 }
 

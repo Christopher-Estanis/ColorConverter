@@ -20,10 +20,9 @@
             <div class="align navegacao">
                 <label for="rgb" class="linha">RGB:</label>
                 <input type="text" id="rgb" maxlength="13" placeholder="0 - 255" class="box-text" 
-                    onkeypress="chageValue('rgb', 1)"
+                    onkeypress="chageValue('rgb', 7, 13)"
                     onfocusin="focusExemple('rgb', '(255, 255, 000)')" onfocusout="exitExemple('rgb')">
                 <label for="rgb" class="exemplo" id="textExrgb"></label>
-                <button class="btn-style border-total" id="resprgb" onclick="mainConverter('rgb', 7)">Resposta</button>
                 <div class="corEx align border-total" id="colorExrgb"></div>
                 <label for="Escrito" class="linha align">Resposta:</label>
                 <label id="resultadorgb" class="resultado align"></label>
@@ -36,10 +35,9 @@
             <div class="align navegacao">
                 <label for="hex" class="linha">HSV:</label>
                 <input type="text" id="hsv" maxlength="17" placeholder="000° - 300° , 000% - 100%" class="box-text"
-                    onkeypress="chageValue('hsv', 5)"
+                    onkeypress="chageValue('hsv', 8, 17)"
                     onfocusin="focusExemple('hsv', '(000°,000%,000%)')" onfocusout="exitExemple('hsv')">
                 <label for="hsv" class="exemplo" id="textExhsv"></label>
-                <button class="btn-style border-total" id="resphsv" onclick="mainConverter('hsv', 8)">Resposta</button>
                 <div class="corEx align border-total" id="colorExhsv"></div>
                 <label for="Escrito" class="linha align">Resposta:</label>
                 <label id="resultadohsv" class="resultado align"></label>
