@@ -84,7 +84,7 @@ function verificationRgb(value, numb) {
 		else if (e === "") {
 			alert(`ERRO: Você não escreveu um dos valores.`)
 			return erro = true;
-		} else if (!Number(e) && numb !== 4) {
+		} else if (!Number(e) && numb !== 4 && numb !== 6) {
 			alert(`ERRO: O valor ${e} contém uma letra.`);
 			return erro = true;
 		} else if (numb === 1 || numb === 3 || numb === 7) {
@@ -97,7 +97,7 @@ function verificationRgb(value, numb) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
-		} else if (numb === 4) {
+		} else if (numb === 4 || numb === 6) {
 			if (x.test(e)) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
