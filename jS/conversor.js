@@ -171,12 +171,13 @@ function rgbToHsv(arrayRgb) {
 
 function hsvToRgb(arrayHsv){
 	const hue = arrayHsv[0];
-	const saturation = arrayHsv[1];
-	const value = arrayHsv[2];
+	const saturation = arrayHsv[1]/100;
+	const value = arrayHsv[2]/100;
 	const chroma = value * saturation;
 	const smallerRgbComponent = value - chroma;
 	const auxCalc = chroma * (1 - Math.abs((hue/60)%2 - 1));
 	let red,blue,green;
+
 	if (hue >=0 && hue < 60){
 		red = chroma + smallerRgbComponent;
 		green = auxCalc + smallerRgbComponent;
@@ -245,13 +246,6 @@ function hexToRgb(hex) {
 
 // -----------input -----------------
 
-//Mask hsv
-function maskHsv(id){
-	$(document).ready(function(){
-		$(`#${id}`).mask("099°,099,099");
-
-	})
-}
 
 
 // adiciona virgulas e parenteses no input
