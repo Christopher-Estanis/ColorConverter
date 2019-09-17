@@ -3,7 +3,6 @@
 function mainConverter(id, conversor) {
 	const colorValue = getValue(id).value;
 	const arrayVerif = colorValue.replace(/[)(%° ]/g, "").split(",");
-	console.log(arrayVerif)
 	const rgbVerif = verificationRgb(arrayVerif, conversor);
 	if (rgbVerif === true) { return }
 
@@ -49,12 +48,26 @@ function mainConverter(id, conversor) {
 		writeResp(id, arrayHsv, "HSV");
 		changeColorEx(id, colorValue)
 	}
-	if(conversor === 8){
+	if(conversor === 8) {
 		const arrayRgb = hsvToRgb(arrayVerif);
-		console.log(arrayRgb);
 		
 		writeResp(id, arrayRgb, "RGB");
 		changeColorEx(id,arrayRgb);
+	}
+	if(conversor === 9) {
+		const arrayRgb = cmyToRgb(arrayVerif);
+		const x = arrayRgb.toString();
+		const y = `(${x})`;
+		changeColorEx(id, y);
+		const arrayHsv = rgbToHsv(arrayRgb);
+		writeResp(id, arrayHsv, "HSV");
+	}
+	if(conversor === 10) {
+		const valueRgb = hsvToRgb(arrayVerif);
+		changeColorEx(id, valueRgb);
+		const arrayRgb = valueRgb.replace(/[)(%° ]/g, "").split(",");
+		const arrayCmy = rgbToCmy(arrayRgb);
+		writeResp(id, arrayCmy, "CMY");
 	}
 }
 
@@ -93,7 +106,7 @@ function verificationRgb(value, numb) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
-		} else if (numb === 2 || numb === 5) {
+		} else if (numb === 2 || numb === 5 || numb === 9) {
 			if (e > 1 || e < 0) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
@@ -254,18 +267,18 @@ function hexToRgb(hex) {
 // adiciona virgulas e parenteses no input
 function chageValue(id, conversor, maxLength) {
 	const name = this.getValue(id);
-	const rgbNumbers = /[137]/g;
-	const cmyNumbers = /[25]/g;
-	const hexNumbers = /[46]/g;
-	const hsvNumbers = /[8]/g;
+	const rgbCaractere = /[137]!10\d/g;
+	const cmyCaractere = /[259]/g;
+	const hexCaractere = /[46]/g;
+	const hsvCaractere = /[8]10\d/g;
 	
-	if (rgbNumbers.test(conversor)) {
+	if (rgbCaractere.test(conversor)) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 4, ',', 'back')
 		changeIf(name, 8, ',', 'back')
 		changeIf(name, 12, ')', 'back')
 	}
-	if (cmyNumbers.test(conversor)) {
+	if (cmyCaractere.test(conversor)) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 2, '.', 'back')
 		changeIf(name, 9, ', ', 'back')
@@ -274,10 +287,10 @@ function chageValue(id, conversor, maxLength) {
 		changeIf(name, 22, '.', 'back')
 		changeIf(name, 29, ')', 'back')
 	}
-	if (hexNumbers.test(conversor)) {
+	if (hexCaractere.test(conversor)) {
 		changeIf(name, 0, '#', 'front')
 	}
-	if (hsvNumbers.test(conversor)) {
+	if (hsvCaractere.test(conversor) || conversor === 10) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 4, '°', 'back')
 		changeIf(name, 5, ', ', 'back')
@@ -287,7 +300,7 @@ function chageValue(id, conversor, maxLength) {
 		changeIf(name, 17, ')', 'back')
 	}
 	if(name.value.length === maxLength) {
-		mainConverter(id, conversor)
+		mainConverter(id, conversor);
 	}
 }
 

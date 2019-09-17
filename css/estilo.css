@@ -15,7 +15,7 @@ div.corEx {
     width: 95%;
     height: 20px;
     margin-top: 20px;
-    border: 1px solid #525252;
+    border: 1px solid #949494;
 }
 
 .color-gray {
@@ -85,7 +85,7 @@ div.navegacao {
     height: 70px;
     text-decoration: none;
     border-bottom: 2px solid #0a798d;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .footer {
