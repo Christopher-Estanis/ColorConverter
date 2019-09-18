@@ -3,7 +3,7 @@
 function mainConverter(id, conversor) {
 	const colorValue = getValue(id).value;
 	const arrayVerif = colorValue.replace(/[)(%° ]/g, "").split(",");
-	const rgbVerif = verificationRgb(arrayVerif, conversor);
+	const rgbVerif = verificationRgb(arrayVerif, conversor, id);
 	console.log(arrayVerif);
 	if (rgbVerif === true) { return }
 
@@ -63,21 +63,21 @@ function mainConverter(id, conversor) {
 		writeResp(id, arrayHsv, "HSV");
 		changeColorEx(id, y);
 	}
-	if(conversor === 'a') {
+	if(conversor === 10) {
 		const stringRgb = hsvToRgb(arrayVerif);
 		const arrayRgb = stringRgb.replace(/[)(%° ]/g, "").split(",");
 		const arrayCmy = rgbToCmy(arrayRgb);
 		writeResp(id, arrayCmy, "CMY");
 		changeColorEx(id, stringRgb);
 	}
-	if(conversor === 'b') {
+	if(conversor === 11) {
 		const stringRgb = hexToRgb(colorValue);
 		const arrayRgb = stringRgb.replace(/[)( ]/g, "").split(",");
 		const arrayHsv = rgbToHsv(arrayRgb);
 		writeResp(id, arrayHsv, "HSV");
 		changeColorEx(id, stringRgb);
 	}
-	if(conversor === 'c') {
+	if(conversor === 12) {
 		const stringRgb = hsvToRgb(arrayVerif);
 		const arrayRgb = stringRgb.replace(/[)(%° ]/g, "").split(",");
 		const arrayHex = rgbToHex(arrayRgb);
@@ -104,34 +104,49 @@ function changeColorEx(id, color) {
 
 // ----------Verificações-----------
 // Função para verificar se o array é menor que zero, maior que 255 ou contem letras (RGB)
-function verificationRgb(value, numb) {
+function verificationRgb(value, numb, id) {
 	let erro = false;
 	const hexRegExp = /[g-z]/gi;
-	const caracterRegExp = /[a-z]/gi
-	const rgbCaractere = /[137]/g;
-	const cmyCaractere = /[259]/g;
-	const hexCaractere = /[46b]/g;
-	const hsvCaractere = /[8ac]/g;
+	const caracterRegExp = /[a-z]/gi;
+
 	value.forEach(e => {
 		if (e === "000") { return }
 		else if (e === "") {
 			alert(`ERRO: Você não escreveu um dos valores.`)
 			return erro = true;
-		} else if (caracterRegExp.test(e) && numb !== 4 && numb !== 6 && numb !== 'b') {
+		} 
+		else if (caracterRegExp.test(e) && numb !== 4 && numb !== 6 && numb !== 11) {
 			alert(`ERRO: O valor ${e} contém uma letra.`);
 			return erro = true;
-		} else if (rgbCaractere.test(numb)) {
+		} 
+		else if ('rgb' === id) {
 			if (e > 255 || e < 0) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
-		} else if (cmyCaractere.test(numb)) {
+		} 
+		else if ('cmy' === id) {
 			if (e > 1 || e < 0) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
-		} else if (hexCaractere.test(numb)) {
+		} 
+		else if ('hex' === id) {
 			if (hexRegExp.test(e)) {
+				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
+				return erro = true;
+			}
+		} 
+		else if ('hsv' === id) {
+			if(value[0] > 300 || value[0] < 0){
+				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
+				return erro = true;
+			}
+			if(value[1] > 100 || value[1] < 0){
+				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
+				return erro = true;
+			}
+			if(value[2] > 100 || value[2] < 0){
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
@@ -286,19 +301,14 @@ function hexToRgb(hex) {
 // adiciona virgulas e parenteses no input
 function chageValue(id, conversor, maxLength) {
 	const name = this.getValue(id);
-	const rgbCaractere = /[137]/g;
-	const cmyCaractere = /[259]/g;
-	const hexCaractere = /[46b]/g;
-	const hsvCaractere = /[8ac]/g;
-	
-	if (rgbCaractere.test(conversor)) {
+	if ('rgb' === id) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 4, ',', 'back')
 		changeIf(name, 8, ',', 'back')
 		changeIf(name, 12, ')', 'back')
 		console.log('passou');
 	}
-	if (cmyCaractere.test(conversor)) {
+	if ('cmy' === id) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 2, '.', 'back')
 		changeIf(name, 9, ', ', 'back')
@@ -307,10 +317,10 @@ function chageValue(id, conversor, maxLength) {
 		changeIf(name, 22, '.', 'back')
 		changeIf(name, 29, ')', 'back')
 	}
-	if (hexCaractere.test(conversor)) {
+	if ('hex' === id) {
 		changeIf(name, 0, '#', 'front')
 	}
-	if (hsvCaractere.test(conversor) || conversor === 10) {
+	if ('hsv' === id) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 4, '°', 'back')
 		changeIf(name, 5, ', ', 'back')
