@@ -15,27 +15,27 @@
     <nav class="align-row">
         <div class="container align border-top shadow-gray conversor">
             <header class="header align container border-top">
-                <h2>CMY to HSV:</h2>
+                <h2>HEX to HSV:</h2>
             </header>
             <div class="align navegacao">
-                <label for="cmy" class="linha">CMY:</label>
-                <input type="text" id="cmy" maxlength="30" placeholder="0 - 1" class="box-text" 
-                    onkeypress="chageValue('cmy', 9, 30)"
-                    onfocusin="focusExemple('cmy', '(0.000000, 1.000000, 1.000000)')" onfocusout="exitExemple('cmy')">
-                <label for="rgb" class="exemplo" id="textExcmy"></label>
-                <div class="corEx align border-total" id="colorExcmy"></div>
+                <label for="hex" class="linha">HEX:</label>
+                <input type="text" id="hex" maxlength="7" placeholder="000000 - ffffff" class="box-text" 
+                    onkeypress="chageValue('hex', 'b', 7)"
+                    onfocusin="focusExemple('hex', '#ffffff')" onfocusout="exitExemple('hex')">
+                <label for="hex" class="exemplo" id="textExhex"></label>
+                <div class="corEx align border-total" id="colorExhex"></div>
                 <label for="Escrito" class="linha align">Resposta:</label>
-                <label id="resultadocmy" class="resultado align"></label>
+                <label id="resultadohex" class="resultado align"></label>
             </div>
         </div>
         <div class="container align border-top shadow-gray conversor">
             <header class="header align container border-top">
-                <h2>HSV to CMY:</h2>
+                <h2>HSV to HEX:</h2>
             </header>
             <div class="align navegacao">
                 <label for="hex" class="linha">HSV:</label>
                 <input type="text" id="hsv" maxlength="17" placeholder="000° - 300° , 000% - 100%" class="box-text"
-                    onkeypress="chageValue('hsv', 'a', 18)"
+                    onkeypress="chageValue('hsv', 'c', 18)"
                     onfocusin="focusExemple('hsv', '(000°,000%,000%)')" onfocusout="exitExemple('hsv')">
                 <label for="hsv" class="exemplo" id="textExhsv"></label>
                 <div class="corEx align border-total" id="colorExhsv"></div>

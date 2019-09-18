@@ -4,6 +4,7 @@ function mainConverter(id, conversor) {
 	const colorValue = getValue(id).value;
 	const arrayVerif = colorValue.replace(/[)(%° ]/g, "").split(",");
 	const rgbVerif = verificationRgb(arrayVerif, conversor);
+	console.log(arrayVerif);
 	if (rgbVerif === true) { return }
 
 	if (conversor === 1) {
@@ -32,9 +33,9 @@ function mainConverter(id, conversor) {
 		const arrayRgb = cmyToRgb(arrayVerif);
 		const x = arrayRgb.toString()
 		const y = `(${x})`
-		changeColorEx(id, y)
 		const arrayHex = rgbToHex(arrayRgb);
 		writeResp(id, arrayHex, "Hex");
+		changeColorEx(id, y)
 	}
 	if (conversor === 6) {
 		const stringRgb = hexToRgb(colorValue);
@@ -58,16 +59,30 @@ function mainConverter(id, conversor) {
 		const arrayRgb = cmyToRgb(arrayVerif);
 		const x = arrayRgb.toString();
 		const y = `(${x})`;
-		changeColorEx(id, y);
 		const arrayHsv = rgbToHsv(arrayRgb);
 		writeResp(id, arrayHsv, "HSV");
+		changeColorEx(id, y);
 	}
-	if(conversor === 10) {
-		const valueRgb = hsvToRgb(arrayVerif);
-		changeColorEx(id, valueRgb);
-		const arrayRgb = valueRgb.replace(/[)(%° ]/g, "").split(",");
+	if(conversor === 'a') {
+		const stringRgb = hsvToRgb(arrayVerif);
+		const arrayRgb = stringRgb.replace(/[)(%° ]/g, "").split(",");
 		const arrayCmy = rgbToCmy(arrayRgb);
 		writeResp(id, arrayCmy, "CMY");
+		changeColorEx(id, stringRgb);
+	}
+	if(conversor === 'b') {
+		const stringRgb = hexToRgb(colorValue);
+		const arrayRgb = stringRgb.replace(/[)( ]/g, "").split(",");
+		const arrayHsv = rgbToHsv(arrayRgb);
+		writeResp(id, arrayHsv, "HSV");
+		changeColorEx(id, stringRgb);
+	}
+	if(conversor === 'c') {
+		const stringRgb = hsvToRgb(arrayVerif);
+		const arrayRgb = stringRgb.replace(/[)(%° ]/g, "").split(",");
+		const arrayHex = rgbToHex(arrayRgb);
+		writeResp(id, arrayHex, "Hex");
+		changeColorEx(id, stringRgb);
 	}
 }
 
@@ -93,25 +108,29 @@ function verificationRgb(value, numb) {
 	let erro = false;
 	const hexRegExp = /[g-z]/gi;
 	const caracterRegExp = /[a-z]/gi
+	const rgbCaractere = /[137]/g;
+	const cmyCaractere = /[259]/g;
+	const hexCaractere = /[46b]/g;
+	const hsvCaractere = /[8ac]/g;
 	value.forEach(e => {
 		if (e === "000") { return }
 		else if (e === "") {
 			alert(`ERRO: Você não escreveu um dos valores.`)
 			return erro = true;
-		} else if (caracterRegExp.test(e) && numb !== 4 && numb !== 6) {
+		} else if (caracterRegExp.test(e) && numb !== 4 && numb !== 6 && numb !== 'b') {
 			alert(`ERRO: O valor ${e} contém uma letra.`);
 			return erro = true;
-		} else if (numb === 1 || numb === 3 || numb === 7) {
+		} else if (rgbCaractere.test(numb)) {
 			if (e > 255 || e < 0) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
-		} else if (numb === 2 || numb === 5 || numb === 9) {
+		} else if (cmyCaractere.test(numb)) {
 			if (e > 1 || e < 0) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
-		} else if (numb === 4 || numb === 6) {
+		} else if (hexCaractere.test(numb)) {
 			if (hexRegExp.test(e)) {
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
@@ -267,16 +286,17 @@ function hexToRgb(hex) {
 // adiciona virgulas e parenteses no input
 function chageValue(id, conversor, maxLength) {
 	const name = this.getValue(id);
-	const rgbCaractere = /[137]!10\d/g;
+	const rgbCaractere = /[137]/g;
 	const cmyCaractere = /[259]/g;
-	const hexCaractere = /[46]/g;
-	const hsvCaractere = /[8]10\d/g;
+	const hexCaractere = /[46b]/g;
+	const hsvCaractere = /[8ac]/g;
 	
 	if (rgbCaractere.test(conversor)) {
 		changeIf(name, 0, '(', 'front')
 		changeIf(name, 4, ',', 'back')
 		changeIf(name, 8, ',', 'back')
 		changeIf(name, 12, ')', 'back')
+		console.log('passou');
 	}
 	if (cmyCaractere.test(conversor)) {
 		changeIf(name, 0, '(', 'front')
