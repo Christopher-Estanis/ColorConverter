@@ -1,6 +1,7 @@
 // Função principar para pegar os valores, verificar e converter
 // Parametros vindo do HTML 
 function mainConverter(id, conversor) {
+	console.log(`id:${id},conversor:${conversor}`);
 	const colorValue = getValue(id).value;
 	const arrayVerif = colorValue.replace(/[)(%° ]/g, "").split(",");
 	const rgbVerif = verificationRgb(arrayVerif, conversor, id);
@@ -138,7 +139,7 @@ function verificationRgb(value, numb, id) {
 			}
 		} 
 		else if ('hsv' === id) {
-			if(value[0] > 300 || value[0] < 0){
+			if(value[0] > 360 || value[0] < 0){
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
@@ -183,7 +184,7 @@ function rgbToHex(value) {
 	const hexR = numbRgb[1].toFixed(0).toString(16);
 	const hexG = numbRgb[2].toFixed(0).toString(16);
 	const hexB = numbRgb[1].toFixed(0).toString(16);
-	return `#${hexR}${hexG}${hexB}`
+	return `#${hexR}${hexG}${hexB}`;
 }
 
 function rgbToHsv(arrayRgb) {
@@ -206,6 +207,9 @@ function rgbToHsv(arrayRgb) {
 		hue = (((numRgbZeroOne[0] - numRgbZeroOne[1]) / deltaMaxMin) + 4) * 60;
 	}
 
+	if(hue<0){
+		hue += 360;
+	}
 
 	let saturation;
 	rgbMax == 0 ? saturation = 0 : saturation = deltaMaxMin / rgbMax;
@@ -228,7 +232,7 @@ function hsvToRgb(arrayHsv){
 	const auxCalc = chroma * (1 - Math.abs((hue/60)%2 - 1));
 	let red,blue,green;
 
-	if (hue >=0 && hue < 60){
+	if (hue >0 && hue < 60){
 		red = chroma + smallerRgbComponent;
 		green = auxCalc + smallerRgbComponent;
 		blue = smallerRgbComponent;
@@ -258,6 +262,7 @@ function hsvToRgb(arrayHsv){
 		red = chroma + smallerRgbComponent;
 		green = smallerRgbComponent;
 		blue = auxCalc + smallerRgbComponent;
+		//console.log(`${red},${green},${blue}`);
 
 	}else {
 		red = smallerRgbComponent;
@@ -266,9 +271,10 @@ function hsvToRgb(arrayHsv){
 
 	}
 	RgbZeroOne = [red,green,blue];
-	RgbZeroTo255 = RgbZeroOne.map((color) =>{
+	const RgbZeroTo255 = RgbZeroOne.map((color) =>{
 		return (color * 255).toFixed(0);
-	})
+	});
+	console.log(RgbZeroTo255);
 	return `(${RgbZeroTo255})`;
 
 }
