@@ -181,10 +181,10 @@ function cmyToRgb(value) {
 
 function rgbToHex(value) {
 	const numbRgb = transformNumber(value);
-	const hexR = numbRgb[1].toFixed(0).toString(16);
-	const hexG = numbRgb[2].toFixed(0).toString(16);
-	const hexB = numbRgb[1].toFixed(0).toString(16);
-	return `#${hexR}${hexG}${hexB}`;
+	const hexR = parseInt(numbRgb[1].toFixed(0)).toString(16);
+	const hexG = parseInt(numbRgb[2].toFixed(0)).toString(16);
+	const hexB = parseInt(numbRgb[1].toFixed(0)).toString(16);	
+	return `#${hexR}${hexG}${hexB}`
 }
 
 function rgbToHsv(arrayRgb) {
