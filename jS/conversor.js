@@ -139,7 +139,7 @@ function verificationRgb(value, numb, id) {
 			}
 		} 
 		else if ('hsv' === id) {
-			if(value[0] > 360 || value[0] < 0){
+			if(value[0] >= 360 || value[0] < 0){
 				alert(`ERRO: O valor ${e} não condiz com o modelo de cor.`);
 				return erro = true;
 			}
@@ -232,7 +232,7 @@ function hsvToRgb(arrayHsv){
 	const auxCalc = chroma * (1 - Math.abs((hue/60)%2 - 1));
 	let red,blue,green;
 
-	if (hue >= 0 && hue < 60){
+	if (hue >= 0 && hue < 60 || hue == 360){
 		red = chroma + smallerRgbComponent;
 		green = auxCalc + smallerRgbComponent;
 		blue = smallerRgbComponent;
