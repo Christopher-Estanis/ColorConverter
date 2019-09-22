@@ -181,9 +181,9 @@ function cmyToRgb(value) {
 
 function rgbToHex(value) {
 	const numbRgb = transformNumber(value);
-	const hexR = parseInt(numbRgb[1].toFixed(0)).toString(16);
-	const hexG = parseInt(numbRgb[2].toFixed(0)).toString(16);
-	const hexB = parseInt(numbRgb[1].toFixed(0)).toString(16);	
+	const hexR = parseInt(numbRgb[0].toFixed(0)).toString(16);
+	const hexG = parseInt(numbRgb[1].toFixed(0)).toString(16);
+	const hexB = parseInt(numbRgb[2].toFixed(0)).toString(16);	
 	return `#${hexR}${hexG}${hexB}`
 }
 
