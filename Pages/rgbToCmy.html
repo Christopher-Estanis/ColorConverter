@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style/estilo.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>RGB and CMY</title>
+</head>
+
+<body class="color-gray align">
+    <nav class="align-row">
+        <div class="container align border-top shadow-gray conversor">
+            <header class="header align container border-top">
+                <h2>RGB to CMY:</h2>
+            </header>
+            <div class="align navegacao">
+                <label for="rgb" class="linha">RGB:</label>
+                <input type="text" id="rgb" maxlength="13" placeholder="0 - 255" class="box-text"  
+                    onkeypress="chageValue('rgb', 1, 13)" 
+                    onfocusin="focusExemple('rgb', '(255, 255, 000)')" onfocusout="exitExemple('rgb')">
+                <label for="rgb" class="exemplo" id="textExrgb"></label>
+                <div class="corEx align border-total" id="colorExrgb"></div>
+                <label for="Escrito" class="linha align">Resposta:</label>
+                <label id="resultadorgb" class="resultado align"></label>
+            </div>
+        </div>
+        <div class="container align border-top shadow-gray conversor">
+            <header class="header align container border-top">
+                <h2>CMY to RGB:</h2>
+            </header>
+            <div class="align navegacao">
+                <label for="rgb" class="linha">CMY:</label>
+                <input type="text" id="cmy" maxlength="30" placeholder="0 - 1" class="box-text" 
+                    onkeypress="chageValue('cmy', 2, 30)" 
+                    onfocusin="focusExemple('cmy', '(0.000000, 1.000000, 1.000000)')" onfocusout="exitExemple('cmy')">
+                <label for="rgb" class="exemplo" id="textExcmy"></label>
+                <div class="corEx align border-total" id="colorExcmy"></div>
+                <label for="Escrito" class="linha align">Resposta:</label>
+                <label id="resultadocmy" class="resultado align"></label>
+            </div>
+        </div>
+    </nav>
+
+    <footer class="footer">
+        <a href="index.html" class="link-back align">Voltar</a>
+    </footer>
+    
+    <script src="jS/conversor.js"></script>
+</body>
+
+</html>
